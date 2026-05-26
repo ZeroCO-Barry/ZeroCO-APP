@@ -5,64 +5,88 @@ import { useState } from "react";
 const services = [
   {
     id: "fenster",
-    title: "Fenster- reinigung",
-    text: "Glasklare Fenster inklusive Rahmen & Fensterbänke.",
+    title: "Fensterreinigung",
+    description:
+      "Glasklare Fenster inklusive Rahmen und Fensterbänke.",
     price: 49,
+    icon: "🪟",
   },
   {
     id: "glas",
-    title: "Glas- reinigung",
-    text: "Ideal für große Glasflächen & Wintergärten.",
-    price: 49,
+    title: "Glasreinigung",
+    description:
+      "Perfekt für Glasflächen, Wintergärten und Schaufenster.",
+    price: 59,
+    icon: "✨",
   },
   {
     id: "solar",
-    title: "Sonnen- panelen",
-    text: "Schonende Reinigung für maximale Leistung.",
+    title: "Solaranlagen",
+    description:
+      "Schonende Reinigung für maximale Energieeffizienz.",
     price: 69,
+    icon: "☀️",
   },
 ];
 
 export default function Home() {
-  const [selected, setSelected] = useState(services[0]);
+  const [selectedService, setSelectedService] = useState(services[0]);
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-cyan-50 via-white to-lime-50 px-4 py-8 text-slate-950">
-      <div className="mx-auto max-w-6xl space-y-8">
-        <header className="rounded-[36px] bg-slate-950 p-8 text-white shadow-2xl">
-          <h1 className="text-5xl font-black">ZeroCO</h1>
-          <p className="mt-2 text-lg text-slate-300">
-            Gebäude-, Glas- & Fensterreinigung online buchen
-          </p>
+    <main className="min-h-screen bg-[#f4f7fb] text-black">
+      <div className="mx-auto max-w-7xl px-5 py-10">
+        <header className="mb-10 rounded-[40px] bg-black px-10 py-12 text-white shadow-2xl">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-6xl font-black tracking-tight">
+                ZeroCO₂
+              </h1>
+
+              <p className="mt-3 text-xl text-gray-300">
+                Gebäude-, Glas- & Fensterreinigung online buchen
+              </p>
+            </div>
+
+            <div className="hidden h-28 w-28 items-center justify-center rounded-full bg-lime-400 text-5xl font-black text-black md:flex">
+              Z
+            </div>
+          </div>
         </header>
 
-        <section className="rounded-[36px] bg-white p-7 shadow-xl">
-          <h2 className="mb-6 text-3xl font-black">
-            Welche Leistung wünschen Sie?
-          </h2>
+        <section className="mb-10">
+          <div className="mb-6 flex items-center justify-between">
+            <div>
+              <h2 className="text-4xl font-black">
+                Leistungen auswählen
+              </h2>
 
-          <div className="grid gap-5 md:grid-cols-3">
+              <p className="mt-2 text-lg text-gray-500">
+                Wählen Sie Ihre gewünschte Reinigung aus.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid gap-6 md:grid-cols-3">
             {services.map((service) => (
               <button
                 key={service.id}
-                type="button"
-                onClick={() => setSelected(service)}
-                className={`min-h-[260px] rounded-[30px] border p-7 text-left transition hover:-translate-y-1 hover:shadow-xl ${
-                  selected.id === service.id
-                    ? "border-cyan-500 bg-cyan-50"
-                    : "border-slate-200 bg-white"
+                onClick={() => setSelectedService(service)}
+                className={`rounded-[35px] border p-8 text-left transition-all duration-300 ${
+                  selectedService.id === service.id
+                    ? "border-lime-400 bg-lime-50 shadow-2xl"
+                    : "border-gray-200 bg-white hover:-translate-y-1 hover:shadow-xl"
                 }`}
               >
-                <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-400 to-lime-400 text-2xl font-black">
-                  Z
+                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-black text-4xl text-white">
+                  {service.icon}
                 </div>
 
-                <h3 className="whitespace-pre-line text-4xl font-black leading-none">
-                  {service.title.replace(" ", "\n")}
+                <h3 className="text-3xl font-black">
+                  {service.title}
                 </h3>
 
-                <p className="mt-5 leading-7 text-slate-600">
-                  {service.text}
+                <p className="mt-4 leading-7 text-gray-600">
+                  {service.description}
                 </p>
 
                 <div className="mt-6 text-2xl font-black">
@@ -73,72 +97,80 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="grid gap-8 lg:grid-cols-[1fr_380px]">
-          <div className="space-y-6">
-            <Card title="Preis berechnen">
-              <Input label="Menge / Fläche" placeholder="z. B. 4 m²" />
-              <label className="mt-4 flex items-center justify-between rounded-2xl bg-cyan-50 p-5 font-bold">
-                Starke Verschmutzung (+24 €)
-                <input type="checkbox" />
-              </label>
-            </Card>
-
+        <section className="grid gap-8 lg:grid-cols-[1fr_420px]">
+          <div className="space-y-8">
             <Card title="Termin auswählen">
-              <Input type="date" label="Datum" />
-              <div className="mt-4 grid grid-cols-2 gap-3 md:grid-cols-4">
-                {["10:00", "11:00", "12:00", "13:00", "14:00", "15:00"].map(
-                  (time) => (
-                    <button
-                      key={time}
-                      type="button"
-                      className="rounded-2xl border border-slate-200 bg-white px-4 py-3 font-bold hover:border-cyan-500 hover:bg-cyan-50"
-                    >
-                      {time}
-                    </button>
-                  )
-                )}
+              <div className="grid gap-5 md:grid-cols-2">
+                <Input label="Datum" type="date" />
+                <Input label="Uhrzeit" type="time" />
               </div>
             </Card>
 
             <Card title="Kundendaten">
-              <div className="grid gap-4 md:grid-cols-2">
-                <Input label="Name *" />
-                <Input label="Telefon *" />
-                <Input label="E-Mail" />
-                <Input label="Straße und Hausnummer *" />
-                <Input label="PLZ *" />
-                <Input label="Wohnort *" />
+              <div className="grid gap-5 md:grid-cols-2">
+                <Input label="Vorname" />
+                <Input label="Nachname" />
+                <Input label="E-Mail" type="email" />
+                <Input label="Telefon" />
+                <Input label="Straße" />
+                <Input label="PLZ / Ort" />
               </div>
+            </Card>
+
+            <Card title="Zusätzliche Informationen">
+              <textarea
+                placeholder="Weitere Hinweise..."
+                className="min-h-[160px] w-full rounded-3xl border border-gray-300 p-5 text-lg outline-none focus:border-lime-400"
+              />
             </Card>
           </div>
 
-          <aside className="h-fit rounded-[36px] bg-white p-7 shadow-2xl">
-            <div className="text-sm font-bold text-cyan-700">
+          <aside className="h-fit rounded-[40px] bg-black p-8 text-white shadow-2xl">
+            <div className="text-sm font-bold uppercase tracking-[0.2em] text-lime-400">
+              Ihre Buchung
+            </div>
+
+            <h2 className="mt-3 text-4xl font-black">
               Zusammenfassung
+            </h2>
+
+            <div className="mt-8 space-y-4">
+              <SummaryRow
+                label="Leistung"
+                value={selectedService.title}
+              />
+
+              <SummaryRow
+                label="Preis ab"
+                value={`${selectedService.price} €`}
+              />
+
+              <SummaryRow
+                label="Anfahrt"
+                value="inklusive"
+              />
             </div>
 
-            <h2 className="mt-2 text-3xl font-black">Ihre Buchung</h2>
-
-            <div className="mt-6 space-y-4">
-              <Row label="Leistung" value={selected.title.replace(" ", "")} />
-              <Row label="Preis ab" value={`${selected.price} €`} />
-              <Row label="Zahlung" value="Bar vor Ort" />
-            </div>
-
-            <div className="mt-6 rounded-3xl bg-lime-50 p-5 text-sm text-slate-700">
-              <div className="font-bold text-lime-700">
-                ✓ Keine Vorauszahlung erforderlich
+            <div className="mt-8 rounded-3xl bg-lime-400 p-6 text-black">
+              <div className="text-lg font-black">
+                ✓ Keine Vorauszahlung
               </div>
-              <div className="mt-2">✓ Kurzfristige Termine möglich</div>
-              <div className="mt-2">✓ Zuverlässiger Service</div>
+
+              <div className="mt-3 font-medium">
+                ✓ Flexible Terminvergabe
+              </div>
+
+              <div className="mt-3 font-medium">
+                ✓ Professioneller Reinigungsservice
+              </div>
             </div>
 
-            <button className="mt-7 w-full rounded-3xl bg-lime-500 px-6 py-5 text-lg font-black text-white shadow-xl">
-              Jetzt Termin sichern
+            <button className="mt-8 w-full rounded-3xl bg-white px-6 py-5 text-xl font-black text-black transition hover:bg-lime-400">
+              Termin verbindlich buchen
             </button>
 
-            <button className="mt-4 w-full rounded-3xl bg-cyan-500 px-6 py-5 text-lg font-black text-white shadow-xl">
-              Anfrage senden
+            <button className="mt-4 w-full rounded-3xl border border-white px-6 py-5 text-lg font-bold text-white transition hover:bg-white hover:text-black">
+              Angebot anfragen
             </button>
           </aside>
         </section>
@@ -155,39 +187,53 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <section className="rounded-[36px] bg-white p-7 shadow-xl">
-      <h2 className="mb-6 text-3xl font-black">{title}</h2>
+    <div className="rounded-[35px] bg-white p-8 shadow-xl">
+      <h3 className="mb-6 text-3xl font-black">
+        {title}
+      </h3>
+
       {children}
-    </section>
+    </div>
   );
 }
 
 function Input({
   label,
-  placeholder,
   type = "text",
 }: {
   label: string;
-  placeholder?: string;
   type?: string;
 }) {
   return (
-    <label className="grid gap-2 text-sm font-bold text-slate-700">
-      {label}
+    <label className="block">
+      <div className="mb-2 text-sm font-bold uppercase tracking-wide text-gray-500">
+        {label}
+      </div>
+
       <input
         type={type}
-        placeholder={placeholder}
-        className="h-14 rounded-2xl border border-slate-300 px-5 text-lg outline-none focus:border-cyan-400"
+        className="h-16 w-full rounded-3xl border border-gray-300 px-5 text-lg outline-none transition focus:border-lime-400"
       />
     </label>
   );
 }
 
-function Row({ label, value }: { label: string; value: string }) {
+function SummaryRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
   return (
-    <div className="flex justify-between gap-4 rounded-2xl bg-cyan-50 px-5 py-4">
-      <span className="font-bold text-slate-500">{label}</span>
-      <strong>{value}</strong>
+    <div className="flex items-center justify-between rounded-2xl bg-white/10 px-5 py-4">
+      <span className="text-gray-300">
+        {label}
+      </span>
+
+      <span className="font-black">
+        {value}
+      </span>
     </div>
   );
 }
