@@ -38,8 +38,9 @@ export default function Home() {
 
         {/* HEADER */}
         <header className="mb-10 rounded-[40px] bg-black px-10 py-10 text-white shadow-2xl">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-8">
 
+            {/* LEFT */}
             <div>
               <h1 className="text-6xl font-black tracking-tight">
                 ZeroCO₂
@@ -50,11 +51,14 @@ export default function Home() {
               </p>
             </div>
 
-            <img
-              src="/logo.png"
-              alt="ZeroCO Gebäudereinigung"
-              className="hidden h-40 w-40 object-contain md:block"
-            />
+            {/* RIGHT LOGO */}
+            <div className="hidden md:block">
+              <img
+                src="/logo.png"
+                alt="ZeroCO Gebäudereinigung"
+                className="h-44 w-44 object-contain"
+              />
+            </div>
 
           </div>
         </header>
