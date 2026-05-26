@@ -33,12 +33,12 @@ export default function Home() {
   const [selectedService, setSelectedService] = useState(services[0]);
 
   return (
-    <main className="min-h-screen bg-[#f4f7fb] text-black">
-      <div className="mx-auto max-w-7xl px-5 py-10">
+    <main className="min-h-screen bg-[#f4f7fb] p-5 text-black">
+      <div className="mx-auto max-w-7xl">
 
         {/* HEADER */}
-        <header className="mb-10 rounded-[40px] bg-black px-10 py-10 text-white shadow-2xl">
-          <div className="flex items-center justify-between gap-8">
+        <header className="mb-10 rounded-[40px] bg-black px-10 py-8 text-white shadow-2xl">
+          <div className="flex items-center justify-between">
 
             {/* LEFT */}
             <div>
@@ -46,16 +46,16 @@ export default function Home() {
                 ZeroCO₂
               </h1>
 
-              <p className="mt-3 text-xl text-gray-300">
+              <p className="mt-4 text-xl text-gray-300">
                 Gebäude-, Glas- & Fensterreinigung online buchen
               </p>
             </div>
 
             {/* RIGHT LOGO */}
-            <div className="hidden md:block">
+            <div className="flex items-center justify-center">
               <img
                 src="/logo.png"
-                alt="ZeroCO Gebäudereinigung"
+                alt="ZeroCO Logo"
                 className="h-44 w-44 object-contain"
               />
             </div>
@@ -104,7 +104,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CONTENT */}
+        {/* MAIN CONTENT */}
         <section className="grid gap-8 lg:grid-cols-[1fr_420px]">
 
           {/* LEFT */}
@@ -137,7 +137,7 @@ export default function Home() {
 
           </div>
 
-          {/* RIGHT */}
+          {/* RIGHT SIDEBAR */}
           <aside className="h-fit rounded-[40px] bg-black p-8 text-white shadow-2xl">
 
             <div className="text-sm font-bold uppercase tracking-[0.2em] text-lime-400">
