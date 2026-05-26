@@ -1,25 +1,257 @@
-<header className="mb-10 rounded-[40px] bg-black px-10 py-12 text-white shadow-2xl">
-  <div className="flex items-center justify-between">
-    <div className="flex items-center gap-6">
-      <img
-        src="/logo.png"
-        alt="ZeroCO Logo"
-        className="h-28 w-28 object-contain"
-      />
+"use client";
 
-      <div>
-        <h1 className="text-6xl font-black tracking-tight">
-          ZeroCO₂
-        </h1>
+import { useState } from "react";
 
-        <p className="mt-3 text-xl text-gray-300">
-          Gebäude-, Glas- & Fensterreinigung online buchen
-        </p>
+const services = [
+  {
+    id: "fenster",
+    title: "Fensterreinigung",
+    description:
+      "Glasklare Fenster inklusive Rahmen und Fensterbänke.",
+    price: 49,
+    icon: "🪟",
+  },
+  {
+    id: "glas",
+    title: "Glasreinigung",
+    description:
+      "Perfekt für Glasflächen, Wintergärten und Schaufenster.",
+    price: 59,
+    icon: "✨",
+  },
+  {
+    id: "solar",
+    title: "Solaranlagen",
+    description:
+      "Schonende Reinigung für maximale Energieeffizienz.",
+    price: 69,
+    icon: "☀️",
+  },
+];
+
+export default function Home() {
+  const [selectedService, setSelectedService] = useState(services[0]);
+
+  return (
+    <main className="min-h-screen bg-[#f4f7fb] text-black">
+      <div className="mx-auto max-w-7xl px-5 py-10">
+        
+        <header className="mb-10 rounded-[40px] bg-black px-10 py-10 text-white shadow-2xl">
+          <div className="flex items-center justify-between">
+            
+            <div className="flex items-center gap-6">
+              
+              <img
+                src="/logo.png"
+                alt="ZeroCO Logo"
+                className="h-32 w-32 object-contain"
+              />
+
+              <div>
+                <h1 className="text-6xl font-black tracking-tight">
+                  ZeroCO₂
+                </h1>
+
+                <p className="mt-3 text-xl text-gray-300">
+                  Gebäude-, Glas- & Fensterreinigung online buchen
+                </p>
+              </div>
+
+            </div>
+
+            <div className="hidden h-28 w-28 items-center justify-center rounded-full bg-lime-400 text-5xl font-black text-black md:flex">
+              Z
+            </div>
+          </div>
+        </header>
+
+        <section className="mb-10">
+          <h2 className="text-5xl font-black">
+            Leistungen auswählen
+          </h2>
+
+          <p className="mt-3 text-xl text-gray-500">
+            Wählen Sie Ihre gewünschte Reinigung aus.
+          </p>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {services.map((service) => (
+              <button
+                key={service.id}
+                onClick={() => setSelectedService(service)}
+                className={`rounded-[35px] border p-8 text-left transition-all duration-300 ${
+                  selectedService.id === service.id
+                    ? "border-lime-400 bg-lime-50 shadow-2xl"
+                    : "border-gray-200 bg-white hover:-translate-y-1 hover:shadow-xl"
+                }`}
+              >
+                <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-black text-4xl text-white">
+                  {service.icon}
+                </div>
+
+                <h3 className="text-3xl font-black">
+                  {service.title}
+                </h3>
+
+                <p className="mt-4 leading-7 text-gray-600">
+                  {service.description}
+                </p>
+
+                <div className="mt-6 text-2xl font-black">
+                  ab {service.price} €
+                </div>
+              </button>
+            ))}
+          </div>
+        </section>
+
+        <section className="grid gap-8 lg:grid-cols-[1fr_420px]">
+          
+          <div className="space-y-8">
+
+            <Card title="Termin auswählen">
+              <div className="grid gap-5 md:grid-cols-2">
+                <Input label="Datum" type="date" />
+                <Input label="Uhrzeit" type="time" />
+              </div>
+            </Card>
+
+            <Card title="Kundendaten">
+              <div className="grid gap-5 md:grid-cols-2">
+                <Input label="Vorname" />
+                <Input label="Nachname" />
+                <Input label="E-Mail" type="email" />
+                <Input label="Telefon" />
+                <Input label="Straße" />
+                <Input label="PLZ / Ort" />
+              </div>
+            </Card>
+
+            <Card title="Zusätzliche Informationen">
+              <textarea
+                placeholder="Weitere Hinweise..."
+                className="min-h-[160px] w-full rounded-3xl border border-gray-300 p-5 text-lg outline-none focus:border-lime-400"
+              />
+            </Card>
+
+          </div>
+
+          <aside className="h-fit rounded-[40px] bg-black p-8 text-white shadow-2xl">
+            
+            <div className="text-sm font-bold uppercase tracking-[0.2em] text-lime-400">
+              Ihre Buchung
+            </div>
+
+            <h2 className="mt-3 text-4xl font-black">
+              Zusammenfassung
+            </h2>
+
+            <div className="mt-8 space-y-4">
+              
+              <SummaryRow
+                label="Leistung"
+                value={selectedService.title}
+              />
+
+              <SummaryRow
+                label="Preis ab"
+                value={`${selectedService.price} €`}
+              />
+
+              <SummaryRow
+                label="Anfahrt"
+                value="inklusive"
+              />
+
+            </div>
+
+            <div className="mt-8 rounded-3xl bg-lime-400 p-6 text-black">
+              
+              <div className="text-lg font-black">
+                ✓ Keine Vorauszahlung
+              </div>
+
+              <div className="mt-3 font-medium">
+                ✓ Flexible Terminvergabe
+              </div>
+
+              <div className="mt-3 font-medium">
+                ✓ Professioneller Reinigungsservice
+              </div>
+
+            </div>
+
+            <button className="mt-8 w-full rounded-3xl bg-white px-6 py-5 text-xl font-black text-black transition hover:bg-lime-400">
+              Termin verbindlich buchen
+            </button>
+
+            <button className="mt-4 w-full rounded-3xl border border-white px-6 py-5 text-lg font-bold text-white transition hover:bg-white hover:text-black">
+              Angebot anfragen
+            </button>
+
+          </aside>
+
+        </section>
       </div>
-    </div>
+    </main>
+  );
+}
 
-    <div className="hidden h-28 w-28 items-center justify-center rounded-full bg-lime-400 text-5xl font-black text-black md:flex">
-      Z
+function Card({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className="rounded-[35px] bg-white p-8 shadow-xl">
+      <h3 className="mb-6 text-3xl font-black">
+        {title}
+      </h3>
+
+      {children}
     </div>
-  </div>
-</header>
+  );
+}
+
+function Input({
+  label,
+  type = "text",
+}: {
+  label: string;
+  type?: string;
+}) {
+  return (
+    <label className="block">
+      <div className="mb-2 text-sm font-bold uppercase tracking-wide text-gray-500">
+        {label}
+      </div>
+
+      <input
+        type={type}
+        className="h-16 w-full rounded-3xl border border-gray-300 px-5 text-lg outline-none transition focus:border-lime-400"
+      />
+    </label>
+  );
+}
+
+function SummaryRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
+  return (
+    <div className="flex items-center justify-between rounded-2xl bg-white/10 px-5 py-4">
+      <span className="text-gray-300">
+        {label}
+      </span>
+
+      <span className="font-black">
+        {value}
+      </span>
+    </div>
+  );
+}
