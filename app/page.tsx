@@ -35,36 +35,31 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-[#f4f7fb] text-black">
       <div className="mx-auto max-w-7xl px-5 py-10">
-        
+
+        {/* HEADER */}
         <header className="mb-10 rounded-[40px] bg-black px-10 py-10 text-white shadow-2xl">
           <div className="flex items-center justify-between">
-            
-            <div className="flex items-center gap-6">
-              
-              <img
-                src="/logo.png"
-                alt="ZeroCO Logo"
-                className="h-32 w-32 object-contain"
-              />
 
-              <div>
-                <h1 className="text-6xl font-black tracking-tight">
-                  ZeroCO₂
-                </h1>
+            <div>
+              <h1 className="text-6xl font-black tracking-tight">
+                ZeroCO₂
+              </h1>
 
-                <p className="mt-3 text-xl text-gray-300">
-                  Gebäude-, Glas- & Fensterreinigung online buchen
-                </p>
-              </div>
-
+              <p className="mt-3 text-xl text-gray-300">
+                Gebäude-, Glas- & Fensterreinigung online buchen
+              </p>
             </div>
 
-            <div className="hidden h-28 w-28 items-center justify-center rounded-full bg-lime-400 text-5xl font-black text-black md:flex">
-              Z
-            </div>
+            <img
+              src="/logo.png"
+              alt="ZeroCO Gebäudereinigung"
+              className="hidden h-40 w-40 object-contain md:block"
+            />
+
           </div>
         </header>
 
+        {/* SERVICES */}
         <section className="mb-10">
           <h2 className="text-5xl font-black">
             Leistungen auswählen
@@ -105,8 +100,10 @@ export default function Home() {
           </div>
         </section>
 
+        {/* CONTENT */}
         <section className="grid gap-8 lg:grid-cols-[1fr_420px]">
-          
+
+          {/* LEFT */}
           <div className="space-y-8">
 
             <Card title="Termin auswählen">
@@ -136,8 +133,9 @@ export default function Home() {
 
           </div>
 
+          {/* RIGHT */}
           <aside className="h-fit rounded-[40px] bg-black p-8 text-white shadow-2xl">
-            
+
             <div className="text-sm font-bold uppercase tracking-[0.2em] text-lime-400">
               Ihre Buchung
             </div>
@@ -147,7 +145,7 @@ export default function Home() {
             </h2>
 
             <div className="mt-8 space-y-4">
-              
+
               <SummaryRow
                 label="Leistung"
                 value={selectedService.title}
@@ -166,7 +164,7 @@ export default function Home() {
             </div>
 
             <div className="mt-8 rounded-3xl bg-lime-400 p-6 text-black">
-              
+
               <div className="text-lg font-black">
                 ✓ Keine Vorauszahlung
               </div>
