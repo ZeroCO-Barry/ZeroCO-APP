@@ -77,7 +77,6 @@ export default function Home() {
                 <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-black text-4xl text-white">
                   {service.icon}
                 </div>
-
                 <h3 className="text-3xl font-black">{service.title}</h3>
                 <p className="mt-4 leading-7 text-gray-600">{service.description}</p>
                 <div className="mt-6 text-2xl font-black">ab {service.price} €</div>
@@ -93,7 +92,7 @@ export default function Home() {
                 <Input label="Datum" type="date" required />
 
                 <div>
-                  <div className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-gray-500">
+                  <div className="mb-2 text-sm font-bold uppercase tracking-wide text-gray-500">
                     Uhrzeit <span className="text-red-500">*</span>
                   </div>
 
@@ -190,9 +189,9 @@ function Input({
 }) {
   return (
     <label className="block">
-      <div className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-gray-500">
+      <div className="mb-2 text-sm font-bold uppercase tracking-wide text-gray-500">
         {label}
-        {required && <span className="text-red-500">*</span>}
+        {required && <span className="ml-1 text-red-500">*</span>}
       </div>
 
       <input
