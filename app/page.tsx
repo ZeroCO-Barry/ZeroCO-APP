@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 
 const services = [
@@ -53,10 +54,13 @@ export default function Home() {
 
             {/* RIGHT LOGO */}
             <div className="flex items-center justify-center">
-              <img
+              <Image
                 src="/logo.png"
-                alt="ZeroCO Logo"
-                className="h-44 w-44 object-contain"
+                alt="ZeroCO Gebäudereinigung"
+                width={180}
+                height={180}
+                priority
+                className="object-contain"
               />
             </div>
 
