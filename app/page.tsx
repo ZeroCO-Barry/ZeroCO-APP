@@ -45,14 +45,17 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-cyan-200 via-lime-100 to-pink-100 p-5 text-black">
       <div className="mx-auto max-w-7xl">
-        <header className="mb-10 rounded-[40px] bg-black px-10 py-8 text-white shadow-2xl">
+
+        {/* HEADER */}
+        <header className="glass mb-10 rounded-[40px] p-10 shadow-2xl">
           <div className="flex items-center justify-between gap-6">
+
             <div>
-              <h1 className="text-6xl font-black tracking-tight">
+              <h1 className="gradient-title text-6xl font-black tracking-tight">
                 ZeroCO₂
               </h1>
 
-              <p className="mt-4 text-xl text-gray-300">
+              <p className="mt-4 text-xl text-slate-700">
                 Gebäude-, Glas- & Fensterreinigung online buchen
               </p>
             </div>
@@ -65,9 +68,11 @@ export default function Home() {
               priority
               className="object-contain"
             />
+
           </div>
         </header>
 
+        {/* SERVICES */}
         <section className="mb-10">
           <h2 className="text-5xl font-black">
             Leistungen auswählen
@@ -83,10 +88,10 @@ export default function Home() {
                 key={service.id}
                 type="button"
                 onClick={() => setSelectedService(service)}
-                className={`rounded-[35px] border p-8 text-left transition-all duration-300 ${
+                className={`service-card ${
                   selectedService.id === service.id
-                    ? "border-cyan-400 bg-gradient-to-br from-cyan-100 to-lime-100 shadow-2xl"
-                    : "border-white/70 bg-white/80 hover:-translate-y-1 hover:shadow-xl"
+                    ? "active-service"
+                    : ""
                 }`}
               >
                 <div className="mb-6 flex h-20 w-20 items-center justify-center rounded-3xl bg-black text-4xl text-white">
@@ -109,15 +114,26 @@ export default function Home() {
           </div>
         </section>
 
+        {/* MAIN */}
         <section className="grid gap-8 lg:grid-cols-[1fr_420px]">
+
+          {/* LEFT */}
           <div className="space-y-8">
+
             <Card title="Termin auswählen">
+
               <div className="grid gap-5 md:grid-cols-2">
-                <Input label="Datum" type="date" required />
+
+                <Input
+                  label="Datum"
+                  type="date"
+                  required
+                />
 
                 <div>
                   <div className="mb-2 text-sm font-bold uppercase tracking-wide text-gray-500">
-                    Uhrzeit <span className="ml-1 text-red-500">*</span>
+                    Uhrzeit
+                    <span className="ml-1 text-red-500">*</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -126,10 +142,10 @@ export default function Home() {
                         key={time}
                         type="button"
                         onClick={() => setSelectedTime(time)}
-                        className={`rounded-2xl border px-4 py-4 text-lg font-bold transition ${
+                        className={`time-button ${
                           selectedTime === time
-                            ? "border-cyan-400 bg-cyan-400 text-black"
-                            : "border-gray-300 bg-white hover:border-cyan-400 hover:bg-cyan-50"
+                            ? "active-time"
+                            : ""
                         }`}
                       >
                         {time}
@@ -137,29 +153,63 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
+
               </div>
+
             </Card>
 
             <Card title="Kundendaten">
+
               <div className="grid gap-5 md:grid-cols-2">
-                <Input label="Vorname" required />
-                <Input label="Nachname" required />
-                <Input label="E-Mail" type="email" />
-                <Input label="Telefon" required />
-                <Input label="Straße" required />
-                <Input label="PLZ / Ort" required />
+
+                <Input
+                  label="Vorname"
+                  required
+                />
+
+                <Input
+                  label="Nachname"
+                  required
+                />
+
+                <Input
+                  label="E-Mail"
+                  type="email"
+                />
+
+                <Input
+                  label="Telefon"
+                  required
+                />
+
+                <Input
+                  label="Straße"
+                  required
+                />
+
+                <Input
+                  label="PLZ / Ort"
+                  required
+                />
+
               </div>
+
             </Card>
 
             <Card title="Zusätzliche Informationen">
+
               <textarea
                 placeholder="Weitere Hinweise..."
-                className="min-h-[160px] w-full rounded-3xl border border-gray-300 p-5 text-lg outline-none transition focus:border-cyan-400"
+                className="input-style min-h-[160px] p-5"
               />
+
             </Card>
+
           </div>
 
-          <aside className="h-fit rounded-[40px] bg-white/90 p-8 text-black shadow-2xl backdrop-blur">
+          {/* RIGHT */}
+          <aside className="glass h-fit rounded-[40px] p-8 shadow-2xl">
+
             <div className="text-sm font-bold uppercase tracking-[0.2em] text-lime-500">
               Ihre Buchung
             </div>
@@ -169,28 +219,55 @@ export default function Home() {
             </h2>
 
             <div className="mt-8 space-y-4">
-              <SummaryRow label="Leistung" value={selectedService.title} />
-              <SummaryRow label="Preis ab" value={`${selectedService.price} €`} />
-              <SummaryRow label="Uhrzeit" value={selectedTime || "-"} />
-              <SummaryRow label="Anfahrt" value="inklusive" />
+
+              <SummaryRow
+                label="Leistung"
+                value={selectedService.title}
+              />
+
+              <SummaryRow
+                label="Preis ab"
+                value={`${selectedService.price} €`}
+              />
+
+              <SummaryRow
+                label="Uhrzeit"
+                value={selectedTime || "-"}
+              />
+
+              <SummaryRow
+                label="Anfahrt"
+                value="inklusive"
+              />
+
             </div>
 
             <div className="mt-8 rounded-3xl bg-lime-400 p-6 text-black shadow-xl">
-              <div className="text-lg font-black">✓ Keine Vorauszahlung</div>
-              <div className="mt-3 font-medium">✓ Flexible Terminvergabe</div>
+
+              <div className="text-lg font-black">
+                ✓ Keine Vorauszahlung
+              </div>
+
+              <div className="mt-3 font-medium">
+                ✓ Flexible Terminvergabe
+              </div>
+
               <div className="mt-3 font-medium">
                 ✓ Professioneller Reinigungsservice
               </div>
+
             </div>
 
-            <button className="mt-8 w-full rounded-3xl bg-gradient-to-r from-cyan-400 to-blue-500 px-6 py-5 text-xl font-black text-white shadow-xl transition hover:scale-[1.02]">
+            <button className="booking-button">
               Termin verbindlich buchen
             </button>
 
-            <button className="mt-4 w-full rounded-3xl border border-black px-6 py-5 text-lg font-bold text-black transition hover:bg-black hover:text-white">
+            <button className="offer-button">
               Angebot anfragen
             </button>
+
           </aside>
+
         </section>
       </div>
     </main>
@@ -205,7 +282,7 @@ function Card({
   children: React.ReactNode;
 }) {
   return (
-    <div className="rounded-[35px] bg-white/90 p-8 shadow-xl backdrop-blur">
+    <div className="glass rounded-[35px] p-8 shadow-xl">
       <h3 className="mb-6 text-3xl font-black">
         {title}
       </h3>
@@ -226,25 +303,42 @@ function Input({
 }) {
   return (
     <label className="block">
+
       <div className="mb-2 text-sm font-bold uppercase tracking-wide text-gray-500">
         {label}
-        {required && <span className="ml-1 text-red-500">*</span>}
+
+        {required && (
+          <span className="ml-1 text-red-500">*</span>
+        )}
+
       </div>
 
       <input
         required={required}
         type={type}
-        className="h-16 w-full rounded-3xl border border-gray-300 px-5 text-lg outline-none transition focus:border-cyan-400"
+        className="input-style"
       />
+
     </label>
   );
 }
 
-function SummaryRow({ label, value }: { label: string; value: string }) {
+function SummaryRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: string;
+}) {
   return (
-    <div className="flex items-center justify-between rounded-2xl bg-white px-5 py-4 shadow">
-      <span className="text-gray-600">{label}</span>
-      <span className="font-black">{value}</span>
+    <div className="summary-row">
+      <span className="text-gray-600">
+        {label}
+      </span>
+
+      <span className="font-black">
+        {value}
+      </span>
     </div>
   );
 }
