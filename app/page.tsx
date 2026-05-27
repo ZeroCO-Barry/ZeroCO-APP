@@ -37,7 +37,7 @@ export default function Home() {
     <main className="min-h-screen bg-[#f4f7fb] p-5 text-black">
       <div className="mx-auto max-w-7xl">
         <header className="mb-10 rounded-[40px] bg-black px-10 py-8 text-white shadow-2xl">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between gap-6">
             <div>
               <h1 className="text-6xl font-black tracking-tight">ZeroCO₂</h1>
               <p className="mt-4 text-xl text-gray-300">
@@ -66,6 +66,7 @@ export default function Home() {
             {services.map((service) => (
               <button
                 key={service.id}
+                type="button"
                 onClick={() => setSelectedService(service)}
                 className={`rounded-[35px] border p-8 text-left transition-all duration-300 ${
                   selectedService.id === service.id
@@ -89,11 +90,11 @@ export default function Home() {
           <div className="space-y-8">
             <Card title="Termin auswählen">
               <div className="grid gap-5 md:grid-cols-2">
-                <Input label="Datum" type="date" />
+                <Input label="Datum" type="date" required />
 
                 <div>
-                  <div className="mb-2 text-sm font-bold uppercase tracking-wide text-gray-500">
-                    Uhrzeit
+                  <div className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-gray-500">
+                    Uhrzeit <span className="text-red-500">*</span>
                   </div>
 
                   <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
@@ -118,12 +119,12 @@ export default function Home() {
 
             <Card title="Kundendaten">
               <div className="grid gap-5 md:grid-cols-2">
-                <Input label="Vorname" />
-                <Input label="Nachname" />
+                <Input label="Vorname" required />
+                <Input label="Nachname" required />
                 <Input label="E-Mail" type="email" />
-                <Input label="Telefon" />
-                <Input label="Straße" />
-                <Input label="PLZ / Ort" />
+                <Input label="Telefon" required />
+                <Input label="Straße" required />
+                <Input label="PLZ / Ort" required />
               </div>
             </Card>
 
@@ -178,14 +179,24 @@ function Card({ title, children }: { title: string; children: React.ReactNode })
   );
 }
 
-function Input({ label, type = "text" }: { label: string; type?: string }) {
+function Input({
+  label,
+  type = "text",
+  required = false,
+}: {
+  label: string;
+  type?: string;
+  required?: boolean;
+}) {
   return (
     <label className="block">
-      <div className="mb-2 text-sm font-bold uppercase tracking-wide text-gray-500">
+      <div className="mb-2 flex items-center gap-2 text-sm font-bold uppercase tracking-wide text-gray-500">
         {label}
+        {required && <span className="text-red-500">*</span>}
       </div>
 
       <input
+        required={required}
         type={type}
         className="h-16 w-full rounded-3xl border border-gray-300 px-5 text-lg outline-none transition focus:border-lime-400"
       />
