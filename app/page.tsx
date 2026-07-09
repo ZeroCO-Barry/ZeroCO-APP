@@ -27,16 +27,17 @@ const services = [
   },
 ];
 
-const times = [
-  "10:00",
-  "11:00",
-  "12:00",
-  "13:00",
-  "14:00",
-  "15:00",
-  "16:00",
-  "17:00",
-];
+const times = ["10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00"];
+
+function formatDate(date: string) {
+  if (!date) return "-";
+
+  const d = new Date(`${date}T00:00:00`);
+
+  return `${String(d.getDate()).padStart(2, "0")}.${String(
+    d.getMonth() + 1
+  ).padStart(2, "0")}.${d.getFullYear()}`;
+}
 
 export default function Home() {
   const [selectedService, setSelectedService] = useState(services[0]);
@@ -121,7 +122,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gradient-to-br from-cyan-200 via-lime-100 to-pink-100 p-5 text-black">
       <div className="mx-auto max-w-7xl">
-
         <header className="glass mb-10 rounded-[40px] p-10 shadow-2xl">
           <div className="flex flex-col items-start">
             <Image
@@ -140,9 +140,7 @@ export default function Home() {
         </header>
 
         <section className="mb-10">
-          <h2 className="text-5xl font-black">
-            Leistungen auswählen
-          </h2>
+          <h2 className="text-5xl font-black">Leistungen auswählen</h2>
 
           <p className="mt-3 text-xl text-slate-700">
             Wählen Sie Ihre gewünschte Reinigung aus.
@@ -162,9 +160,7 @@ export default function Home() {
                   {service.icon}
                 </div>
 
-                <h3 className="text-3xl font-black">
-                  {service.title}
-                </h3>
+                <h3 className="text-3xl font-black">{service.title}</h3>
 
                 <p className="mt-4 leading-7 text-gray-600">
                   {service.description}
@@ -180,7 +176,6 @@ export default function Home() {
 
         <section className="grid gap-8 lg:grid-cols-[1fr_420px]">
           <div className="space-y-8">
-
             <Card title="Termin auswählen">
               <div className="grid gap-5 md:grid-cols-2">
                 <Input
@@ -221,54 +216,42 @@ export default function Home() {
                   label="Vorname"
                   required
                   value={form.firstName}
-                  onChange={(value) =>
-                    setForm({ ...form, firstName: value })
-                  }
+                  onChange={(value) => setForm({ ...form, firstName: value })}
                 />
 
                 <Input
                   label="Nachname"
                   required
                   value={form.lastName}
-                  onChange={(value) =>
-                    setForm({ ...form, lastName: value })
-                  }
+                  onChange={(value) => setForm({ ...form, lastName: value })}
                 />
 
                 <Input
                   label="E-Mail"
                   type="email"
                   value={form.email}
-                  onChange={(value) =>
-                    setForm({ ...form, email: value })
-                  }
+                  onChange={(value) => setForm({ ...form, email: value })}
                 />
 
                 <Input
                   label="Telefon"
                   required
                   value={form.phone}
-                  onChange={(value) =>
-                    setForm({ ...form, phone: value })
-                  }
+                  onChange={(value) => setForm({ ...form, phone: value })}
                 />
 
                 <Input
                   label="Straße"
                   required
                   value={form.street}
-                  onChange={(value) =>
-                    setForm({ ...form, street: value })
-                  }
+                  onChange={(value) => setForm({ ...form, street: value })}
                 />
 
                 <Input
                   label="PLZ / Ort"
                   required
                   value={form.city}
-                  onChange={(value) =>
-                    setForm({ ...form, city: value })
-                  }
+                  onChange={(value) => setForm({ ...form, city: value })}
                 />
               </div>
             </Card>
@@ -290,46 +273,19 @@ export default function Home() {
               Ihre Buchung
             </div>
 
-            <h2 className="mt-3 text-4xl font-black">
-              Zusammenfassung
-            </h2>
+            <h2 className="mt-3 text-4xl font-black">Zusammenfassung</h2>
 
             <div className="mt-8 space-y-4">
-              <SummaryRow
-                label="Leistung"
-                value={selectedService.title}
-              />
-
-              <SummaryRow
-                label="Preis ab"
-                value={`${selectedService.price} €`}
-              />
-
-              <SummaryRow
-                label="Datum"
-                value={date || "-"}
-              />
-
-              <SummaryRow
-                label="Uhrzeit"
-                value={selectedTime || "-"}
-              />
-
-              <SummaryRow
-                label="Anfahrt"
-                value="inklusive"
-              />
+              <SummaryRow label="Leistung" value={selectedService.title} />
+              <SummaryRow label="Preis ab" value={`${selectedService.price} €`} />
+              <SummaryRow label="Datum" value={formatDate(date)} />
+              <SummaryRow label="Uhrzeit" value={selectedTime || "-"} />
+              <SummaryRow label="Anfahrt" value="inklusive" />
             </div>
 
             <div className="mt-8 rounded-3xl bg-lime-400 p-6 text-black shadow-xl">
-              <div className="text-lg font-black">
-                ✓ Keine Vorauszahlung
-              </div>
-
-              <div className="mt-3 font-medium">
-                ✓ Flexible Terminvergabe
-              </div>
-
+              <div className="text-lg font-black">✓ Keine Vorauszahlung</div>
+              <div className="mt-3 font-medium">✓ Flexible Terminvergabe</div>
               <div className="mt-3 font-medium">
                 ✓ Professioneller Reinigungsservice
               </div>
@@ -341,9 +297,7 @@ export default function Home() {
               onClick={() => submitBooking("booking")}
               className="booking-button disabled:opacity-60"
             >
-              {sending
-                ? "Wird gesendet..."
-                : "Termin verbindlich buchen"}
+              {sending ? "Wird gesendet..." : "Termin verbindlich buchen"}
             </button>
 
             <button
@@ -382,9 +336,7 @@ function Card({
 }) {
   return (
     <div className="glass rounded-[35px] p-8 shadow-xl">
-      <h3 className="mb-6 text-3xl font-black">
-        {title}
-      </h3>
+      <h3 className="mb-6 text-3xl font-black">{title}</h3>
       {children}
     </div>
   );
@@ -407,9 +359,7 @@ function Input({
     <label className="block">
       <div className="mb-2 text-sm font-bold uppercase tracking-wide text-gray-500">
         {label}
-        {required && (
-          <span className="ml-1 text-red-500">*</span>
-        )}
+        {required && <span className="ml-1 text-red-500">*</span>}
       </div>
 
       <input
@@ -423,22 +373,11 @@ function Input({
   );
 }
 
-function SummaryRow({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
+function SummaryRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="summary-row">
-      <span className="text-gray-600">
-        {label}
-      </span>
-
-      <span className="font-black">
-        {value}
-      </span>
+      <span className="text-gray-600">{label}</span>
+      <span className="font-black">{value}</span>
     </div>
   );
 }
